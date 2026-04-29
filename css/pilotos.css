@@ -1,0 +1,359 @@
+/* css/pilotos.css */
+
+/* Garantir que o body tenha transição suave de cor */
+body {
+    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #000000;
+    overflow-x: hidden;
+}
+
+.pilotos-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    padding-top: 160px;
+    padding-bottom: 60px;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+}
+
+/* Barra de Ações do Topo (Novo Layout Flex) */
+.pilotos-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    gap: 20px;
+    z-index: 10;
+}
+
+/* Barra de Busca Premium */
+.search-container {
+    flex: 1;
+    max-width: 450px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 24px;
+    padding-left: 50px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', sans-serif;
+}
+
+.search-input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.search-container::before {
+    content: "🔍";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+/* Botão Voltar */
+.btn-back-pilotos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.btn-back-pilotos:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-5px);
+}
+
+/* Botão Adicionar (Admin) */
+.top-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.placeholder-action {
+    width: 54px; /* Ocupar mesmo espaço do botão que não apareceu para alinhar o centro certinho */
+}
+
+.btn-add-pilot {
+    background: linear-gradient(135deg, #00f2ea 0%, #007adf 100%);
+    color: white;
+    border: none;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 242, 234, 0.3);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-add-pilot:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 12px 30px rgba(0, 242, 234, 0.5);
+}
+
+/* Container de Categorias (Títulos) */
+.category-section {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 50px;
+}
+
+.category-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 30px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+/* Grid de Pilotos Estilo Formula E (Desktop: 3 colunas, Tablet: 2, Mobile: 1) */
+.pilots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+/* Card do Piloto Estilo Lista Formula E */
+.pilot-list-card {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s;
+    text-decoration: none !important; /* Previne sublinhados indesejados no <a> */
+}
+
+/* Proteção nuclear contra faixas azuis teimosas (underlines e bordas) nas tags-filho do link */
+.pilot-list-card * {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    background-image: none !important;
+}
+
+.pilot-list-card:hover {
+    transform: translateY(-5px);
+}
+
+.pilot-list-card .bg-clip {
+    position: absolute;
+    bottom: 0px; /* Mais pra baixo pra criar o efeito FE */
+    right: 0px;
+    width: 60%;
+    height: 60%;
+    background: var(--team-color, #333);
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%);
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+/* .pilot-list-card:hover .bg-clip estava vazio */
+
+/* Container flex para Nome, Logo da Equipe e Foto */
+.pilot-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* alinhar por baixo */
+    min-height: 120px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.03); /* Leve fundo no card todo */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dados Textuais (Esquerda) */
+.pilot-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-bottom: 10px;
+}
+
+.pilot-first-name {
+    display: none;
+}
+
+.pilot-last-name {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1;
+    font-family: 'Archivo Black', sans-serif;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.pilot-team-name {
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
+    z-index: 3;
+    position: relative;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.8));
+}
+
+.team-logo {
+    display: none; /* Mantido se quiser re-ativar, mas não em uso */
+}
+
+/* Wrapper da Foto de Piloto */
+.pilot-photo-wrapper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 140px; /* Largura para focar no terço direito do card */
+    height: 100%; /* A altura integral do card, já que .pilot-content tem min-height 120px */
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+    /* Faz um fade pra esquerda pra misturar magicamente a foto quadrada/retangular com o fundo da cor da equipe */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 40%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 40%);
+}
+
+/* A Tag de Imagem (Foco Rosto/Capacete) */
+.pilot-photo-small {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center; /* Centraliza a parte superior contendo Rosto/Capacete */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(-5px 0px 10px rgba(0,0,0,0.5));
+}
+
+.pilot-list-card:hover .pilot-photo-small {
+    transform: scale(1.1); /* Um leve zoom ao passar o mouse */
+}
+
+/* Número da Sorte ou Rank no Card */
+.pilot-number {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    font-family: 'Archivo Black', sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 3;
+}
+
+/* Empty State */
+.no-pilots {
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 100px 20px;
+    grid-column: 1 / -1;
+}
+
+/* Responsividade Mobile-First */
+@media (max-width: 1024px) {
+    .pilots-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pilots-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-title {
+        font-size: 2rem;
+    }
+    
+    .pilot-last-name {
+        font-size: 1.8rem;
+    }
+
+    .pilotos-wrapper {
+        padding-top: 140px;
+    }
+
+    .pilotos-header-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+        justify-content: space-between;
+    }
+
+    .btn-back-pilotos {
+        width: 44px;
+        height: 44px;
+    }
+
+    .top-actions {
+        display: flex; /* Mostrar sim no mobile */
+    }
+
+    .placeholder-action {
+        display: none; /* Podemos esconder o placeholder no mobile para a busca usar mais espaço */
+    }
+
+    .btn-add-pilot {
+        width: 44px;
+        height: 44px;
+        font-size: 1.5rem;
+    }
+
+    .search-container {
+        max-width: 100%;
+        width: 100%;
+        order: 3; /* Mandar a barra de busca pra linha de baixo no flex-wrap */
+    }
+
+    .search-input {
+        padding: 10px 15px 10px 40px;
+        font-size: 14px;
+    }
+}

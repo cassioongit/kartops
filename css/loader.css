@@ -1,0 +1,76 @@
+/* Preloader Styles */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 240, 255, 0.95) 100%);
+    backdrop-filter: blur(5px);
+    z-index: 99999;
+    /* Z-index muito alto para ficar sobre tudo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.kart-spinner {
+    font-size: 64px;
+    animation: drive 1.5s infinite ease-in-out;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.1));
+}
+
+.loading-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #667eea;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Animação de dirigir/dash */
+@keyframes drive {
+    0% {
+        transform: translateX(-30px) rotate(-5deg) scale(0.9);
+    }
+
+    50% {
+        transform: translateX(30px) rotate(5deg) scale(1.1);
+    }
+
+    100% {
+        transform: translateX(-30px) rotate(-5deg) scale(0.9);
+    }
+}
+
+/* Animação de pulso para o texto */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Classe para esconder o loader */
+.preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}

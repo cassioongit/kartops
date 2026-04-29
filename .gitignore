@@ -1,0 +1,57 @@
+# ================================================
+# KartOps - .gitignore
+# ================================================
+# Tudo listado aqui permanece APENAS local/no servidor.
+# Nunca vai para o repositório Git.
+# ================================================
+
+# --- SEGREDOS E CONFIGURAÇÕES SENSÍVEIS ---
+.env
+# (o .env.example SÍ vai para o git como template)
+
+# --- SESSÕES PHP ---
+sessions/
+# Arquivos de sessão PHP individuais
+sess_*
+
+# --- CACHE E TEMPORÁRIOS ---
+*.log
+*.tmp
+*.cache
+/tmp/
+
+# --- SISTEMA OPERACIONAL ---
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# --- IDEs E EDITORES ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# --- AGENTES E DOCUMENTAÇÃO INTERNA ---
+.agent/
+.agents/
+.claude/
+_bmad/
+_bmad-output/
+design-artifacts/
+
+# --- BANCO DE DADOS (DUMPS) ---
+*.sql
+*.dump
+
+# --- NODE (se usado) ---
+node_modules/
+npm-debug.log
+
+# --- COMPOSER (se usado) ---
+vendor/
+composer.lock

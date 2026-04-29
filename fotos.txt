@@ -1,0 +1,78 @@
+# Fotos da seção "Clicados" na Home
+# Formato:
+#   - Etapa
+#   -- Pasta
+#   --- URL da pasta do Google Drive
+#   ---- Data do evento (opcional)
+# Linhas com # são ignoradas.
+
+- GP Green Solutions
+-- Bastidores & Pódio
+--- https://drive.google.com/drive/folders/13UZ3ziZruAaWa4bqiayLm-nRHBHWpRB8
+---- 11/04/2026
+
+- GP Green Solutions
+-- Challengers
+--- https://drive.google.com/drive/folders/1C-V_ATJwPlQb5l59UZLuZSSmiQ5ASoDB
+---- 11/04/2026
+
+- GP Green Solutions
+-- Master
+--- https://drive.google.com/drive/folders/1PePmDstIcBt4vSimD6x1lovayMLVwZLw
+---- 11/04/2026
+
+
+- GP CARDOSO FUNILARIA
+-- Bastidores
+--- https://drive.google.com/drive/folders/1ASOiF3gYEOwuW4nx-HVeuJylOBHUKtQd
+---- 14/03/2026
+
+- GP CARDOSO FUNILARIA
+-- Challengers
+--- https://drive.google.com/drive/folders/1FtY5rQ09vr7EoM7DeF4N4w2aZPMxi5F7
+---- 14/03/2026
+
+- GP CARDOSO FUNILARIA
+-- Master
+--- https://drive.google.com/drive/folders/1SyoRO-oksnr7FI55cDfGBxEi0koWr1R7
+---- 14/03/2026
+
+- GP CARDOSO FUNILARIA
+-- Pódio
+--- https://drive.google.com/drive/folders/1uRrEKMpnPo-IW2weTkxMIhrqbt0P8Aew
+---- 14/03/2026
+
+- GP NOVA DUTRA
+-- Bastidores
+--- https://drive.google.com/drive/folders/17ySrrDpfFStrPPweTWBoULQn6gAVKa1e
+---- 28/02/2026
+
+- GP NOVA DUTRA
+-- Challengers II
+--- https://drive.google.com/drive/folders/1H8wAXKBUMD8QkvUowB7qP_H6yG_NuJnW
+---- 28/02/2026
+
+- GP NOVA DUTRA
+-- Challengers I
+--- https://drive.google.com/drive/folders/1qzUw3NoERn8rbfGToUbSp07HiIDQTyQp
+---- 28/02/2026
+
+- GP NOVA DUTRA
+-- Masters
+--- https://drive.google.com/drive/folders/1OBdz5FATKkaTzTnR3ipI-WbJZr68W0zZ
+---- 28/02/2026
+
+- AINEXT MYRMEX
+-- Bastidores
+--- https://drive.google.com/drive/folders/13qfTJ93aay8kPHMIlAIwWdvX7KZHKFCy
+---- 31/01/2026
+
+- AINEXT MYRMEX
+-- Challengers
+--- https://drive.google.com/drive/folders/1VKYN9PqfUVA_C9jLXf4pBmWUfpcMLM4b
+---- 31/01/2026
+
+- AINEXT MYRMEX
+-- Masters
+--- https://drive.google.com/drive/folders/1UIjnYRd2w2UcsDqCDOYmdZYoXyLUwPW5
+---- 31/01/2026

@@ -1,0 +1,129 @@
+/**
+ * =====================================================
+ * SPONSORS SECTION - Sistema KartOps
+ * =====================================================
+ * CSS unificado para a seção de patrocinadores
+ * Usado em TODAS as páginas - tamanhos e estilos idênticos
+ */
+
+/* ===== SEÇÃO DE PATROCINADORES ===== */
+.sponsors-section {
+    max-width: 1024px;
+    margin: 60px auto 40px;
+    padding: 40px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sponsors-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 32px;
+}
+
+.sponsors-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.sponsor-tier {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+}
+
+/* ===== CARDS DE PATROCINADORES ===== */
+.sponsor-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sponsor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== IMAGENS DOS LOGOS ===== */
+.sponsor-card img {
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    max-height: 100px;
+    max-width: 240px;
+}
+
+/* ===== TIER 1 - PRINCIPAL ===== */
+.sponsor-tier.tier-1 .sponsor-card {
+    padding: 24px;
+    border-radius: 20px;
+}
+
+.sponsor-tier.tier-1 .sponsor-card img {
+    max-height: 200px;
+    max-width: 400px;
+}
+
+/* ===== TIER 2 - SECUNDÁRIOS ===== */
+.sponsor-tier.tier-2 .sponsor-card {
+    padding: 16px;
+}
+
+.sponsor-tier.tier-2 .sponsor-card img {
+    max-height: 140px;
+    max-width: 300px;
+}
+
+/* ===== TIER 3 - APOIADORES ===== */
+.sponsor-tier.tier-3 .sponsor-card {
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.sponsor-tier.tier-3 .sponsor-card img {
+    max-height: 100px;
+    max-width: 240px;
+}
+
+/* ===== AJUSTES ESPECÍFICOS POR PATROCINADOR ===== */
+
+/* Aumentar tamanho específico para Autoradio e Botequim GP em 56.25% adicional */
+.sponsor-tier.tier-3 .sponsor-card img[alt*="AUTORADIO"],
+.sponsor-tier.tier-3 .sponsor-card img[alt*="Autoradio"],
+.sponsor-tier.tier-3 .sponsor-card img[alt*="BOTEQUIM"],
+.sponsor-tier.tier-3 .sponsor-card img[alt*="Botequim"] {
+    max-height: 156px;
+    max-width: 374px;
+}
+
+/* Diminuir AINEXT MYRMEX (Tier 1) em 15% */
+.sponsor-tier.tier-1 .sponsor-card img[alt*="AINEXT"],
+.sponsor-tier.tier-1 .sponsor-card img[alt*="Ainext"],
+.sponsor-tier.tier-1 .sponsor-card img[alt*="MYRMEX"],
+.sponsor-tier.tier-1 .sponsor-card img[alt*="Myrmex"] {
+    max-height: 170px;
+    /* 200px * 0.85 = 170px */
+    max-width: 340px;
+    /* 400px * 0.85 = 340px */
+}
+
+/* Diminuir CARDOSO FUNILARIA (Tier 2) em 15% */
+.sponsor-tier.tier-2 .sponsor-card img[alt*="CARDOSO"],
+.sponsor-tier.tier-2 .sponsor-card img[alt*="Cardoso"],
+.sponsor-tier.tier-2 .sponsor-card img[alt*="FUNILARIA"],
+.sponsor-tier.tier-2 .sponsor-card img[alt*="Funilaria"] {
+    max-height: 119px;
+    /* 140px * 0.85 = 119px */
+    max-width: 255px;
+    /* 300px * 0.85 = 255px */
+}

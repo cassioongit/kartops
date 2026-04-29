@@ -1,0 +1,1030 @@
+/* CSS Moderno v3 - KartOps Dark Premium */
+/* Inspired by the reference design (Bento/Dark/Glassmorphism) */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-main: #000000;
+    --bg-card: #27282b;
+    --bg-card-hover: #2f3033;
+    --accent-yellow: #f8b319;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --card-radius: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000000;
+    background: #000000;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+}
+
+/* Layout Grid System */
+.home-grid-container {
+    max-width: 1440px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 140px 20px 60px !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    overflow-x: hidden;
+}
+
+.grid-column {
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* Greeting bar — full width across all 3 columns */
+.greeting-bar {
+    grid-column: 1 / -1;
+    padding: 4px 0 8px;
+}
+
+.greeting-title {
+    font-size: 32px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.greeting-sub {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+@media (max-width: 1200px) {
+    .home-grid-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 800px) {
+    .home-grid-container {
+        grid-template-columns: 1fr;
+        padding-top: 100px;
+    }
+}
+
+/* Common Bento Card Style */
+.bento-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--card-radius);
+    padding: 24px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.bento-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(65, 105, 225, 0.15);
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* ===== Standard Section Title (PRÓXIMA ETAPA / ONBOARDS / CLICADOS) ===== */
+.section-title {
+    font-size: 21px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+}
+
+.bento-title {
+    font-size: 21px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+/* Section 1: Hero / Next Event */
+.hero-section {
+    grid-column: span 1;
+}
+
+/* Label 'PRÓXIMA ETAPA' — usa section-title */
+.hero-section .section-label {
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 18px;
+    display: block;
+}
+
+.hero-countdown {
+    display: flex;
+    gap: 10px;
+}
+
+.countdown-item {
+    text-align: center;
+}
+
+.countdown-val {
+    background: rgba(40, 42, 43, 0.8);
+    backdrop-filter: blur(4px);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 28px;
+    font-weight: 800;
+    min-width: 60px;
+    display: block;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.countdown-unit {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+/* Section 1: Hero Countdown Row */
+.hero-countdown-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.hero-countdown {
+    display: flex;
+    gap: 12px;
+}
+
+/* Flip Clock Style Blocks */
+.cd-block {
+    width: 42px;
+    height: 50px;
+    border-radius: 6px;
+    background: #10b981; /* Verde piscina / Esmeralda */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.team-highlight-square {
+    background: #45484d; /* Ainda mais claro para logos escuros */
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.03); /* Brilho interno sutil */
+    border-radius: var(--card-radius);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.12); /* Borda um pouco mais visível */
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-height: 400px;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Horizontal Divider Line */
+.cd-block::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+/* Side notches for flip effect */
+.cd-block::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: transparent;
+    border-left: 2px solid #00000044;
+    border-right: 2px solid #00000044;
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+.cd-val {
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.cd-unit {
+    font-size: 6px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    z-index: 1;
+}
+
+/* Event info below countdown */
+.hero-event-title {
+    font-size: 21px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    line-height: 1.1;
+}
+
+.hero-event-meta {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Blue pill button */
+.hero-btn-stages {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #1565c0;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 50px;
+    transition: background 0.2s;
+}
+
+.calendar-links a:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
+}
+
+.hero-btn-stages:hover {
+    background: #1976d2;
+}
+
+/* Section 2: Onboards Featured */
+.onboard-section-featured {
+    grid-column: span 1;
+    margin-top: 30px;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    background-color: #1c1e22;
+    padding: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.onb-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* ONBOARDS title — inherits same style as .section-title */
+.onb-title {
+    font-size: 21px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+}
+
+.onb-view-all {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+}
+
+.onb-view-all:hover {
+    opacity: 1;
+}
+
+.onb-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* Grid: 4 cols desktop / 2 cols mobile */
+.onb-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.onb-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Iframe wrapper — 16:9 with clickable play overlay */
+.onb-iframe-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    /* 16:9 */
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+}
+
+.onb-iframe-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none;
+    /* preview only, click goes to link */
+}
+
+.onb-play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: #fff;
+    font-size: 22px;
+    text-decoration: none;
+    transition: background 0.2s;
+    z-index: 2;
+}
+
+.onb-play-btn:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.onb-video-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* Mobile: show only 2 cards, hide the rest */
+@media (max-width: 800px) {
+    .onb-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .onb-card:nth-child(n+3) {
+        display: none;
+    }
+
+    .pilots-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* ===== Section 3: Clicados ===== */
+.clicados-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.clicados-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.clicados-card {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    background: #1a1a1a;
+    position: relative;
+}
+
+.clicados-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.4s ease;
+}
+
+.clicados-card:hover img {
+    transform: scale(1.05);
+}
+
+.clicados-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-secondary);
+    font-size: 12px;
+    text-align: center;
+    gap: 6px;
+}
+
+.clicados-placeholder span {
+    font-size: 24px;
+}
+
+.clicados-placeholder code {
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+@media (max-width: 800px) {
+    .clicados-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .clicados-card.hide-mobile {
+        display: none;
+    }
+}
+
+.video-thumbnail-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+.video-thumbnail-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.play-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.play-overlay:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.play-icon {
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+/* Section 4: Pilots Standings */
+.pilots-rank-podium {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 25px;
+    padding-top: 10px;
+}
+
+.podium-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.podium-item.first {
+    order: 2;
+    transform: translateY(-10px);
+}
+
+.podium-item.second {
+    order: 1;
+}
+
+.podium-item.third {
+    order: 3;
+}
+
+.podium-avatar {
+    width: 62px;
+    height: 62px;
+    border-radius: 8px;
+    border: 2px solid var(--accent-yellow);
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: #222;
+}
+
+/* 1st place — 24% larger than original 80px */
+.podium-avatar--first {
+    width: 99px !important;
+    height: 99px !important;
+}
+
+.podium-item.second .podium-avatar {
+    border-color: #c0c0c0;
+    width: 62px;
+    height: 62px;
+}
+
+.podium-item.third .podium-avatar {
+    border-color: #cd7f32;
+    width: 62px;
+    height: 62px;
+}
+
+.podium-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.podium-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.podium-pts {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--accent-yellow);
+}
+
+.podium-pts--first {
+    font-size: 18px;
+}
+
+/* Category toggle switch - Bento Home Version */
+.category-toggle-switch {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    padding: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    width: fit-content;
+}
+
+.category-toggle-switch .toggle-btn {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.category-toggle-switch .toggle-btn.active {
+    background: #4169E1; /* Royal Blue */
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(65, 105, 225, 0.3);
+}
+
+/* Clickable Area Helper */
+.clickable-bento {
+    cursor: pointer;
+    position: relative;
+}
+
+.clickable-bento::after {
+    content: '\f105'; /* caret-right icons */
+    font-family: 'Font Awesome 6 Pro', 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    color: var(--text-secondary);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.clickable-bento:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(65, 105, 225, 0.4);
+}
+
+.clickable-bento:hover::after {
+    opacity: 0.5;
+    transform: translateX(0);
+}
+
+.rank-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rank-table th {
+    text-align: left;
+    font-size: 10px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    padding-bottom: 10px;
+}
+
+.rank-table td {
+    padding: 8px 0;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.rank-table tr:last-child td {
+    border-bottom: none;
+}
+
+.row-pos {
+    font-weight: 700;
+    width: 30px;
+}
+
+.row-pilot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.mini-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+}
+
+.row-pts {
+    text-align: right;
+    font-weight: 700;
+}
+
+/* Grid Stages */
+.grid-stages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stage-card-mini {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stage-info-m .city {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--accent-yellow);
+}
+
+.stage-info-m .track {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.stage-date-m {
+    text-align: right;
+}
+
+.stage-date-m .day {
+    font-size: 14px;
+    font-weight: 800;
+    display: block;
+}
+
+.stage-date-m .month {
+    font-size: 10px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+/* Partners Grid */
+.partners-footer-grid {
+    grid-column: span 3;
+}
+
+.partners-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 30px;
+    align-items: center;
+    justify-items: center;
+    opacity: 0.6;
+}
+
+.partners-logos img {
+    max-width: 100px;
+    filter: brightness(0) invert(1);
+    transition: opacity 0.3s;
+}
+
+.partners-logos img:hover {
+    opacity: 1;
+}
+
+@media (max-width: 800px) {
+    .partners-footer-grid {
+        grid-column: span 1;
+    }
+}
+
+/* Fix for mobile screens (iPhone 16 / small width) to prevent horizontal overflow */
+@media (max-width: 480px) {
+
+    body,
+    html {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    .home-grid-container {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        gap: 16px;
+    }
+
+    .bento-card {
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .greeting-title {
+        font-size: 24px;
+    }
+
+    .section-title,
+    .hero-section .section-label {
+        font-size: 21px;
+    }
+
+    .hero-countdown-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .hero-countdown {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .cd-circle {
+        width: 71px;
+        height: 71px;
+        border-width: 2px;
+    }
+
+    .cd-val {
+        font-size: 22px;
+    }
+
+    .cd-unit {
+        font-size: 8px;
+    }
+
+    .sponsor-mini {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-event-info {
+        text-align: center;
+    }
+
+    .hero-event-title {
+        font-size: 20px;
+    }
+
+    .hero-btn-stages {
+        font-size: 11px;
+        padding: 12px 10px;
+    }
+
+    .onboard-slide {
+        min-width: 240px;
+    }
+}
+
+/* Meet the Teams Section */
+.meet-teams-section {
+    margin-top: 30px;
+}
+
+.team-highlight-square {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.4) 100%);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.team-logo-hero {
+    max-width: 140px;
+    max-height: 140px;
+    object-fit: contain;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.meet-teams-section:hover .team-logo-hero {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.team-logo-placeholder {
+    width: 100px;
+    height: 100px;
+    background: var(--accent-yellow);
+    color: #000;
+    font-size: 48px;
+    font-weight: 900;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.team-hero-info {
+    width: 100%;
+}
+
+.team-hero-name {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--accent-yellow);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.team-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.team-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stat-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+}
+
+@media (max-width: 1300px) {
+    .team-highlight-square {
+        padding: 20px;
+    }
+    .team-hero-name {
+        font-size: 20px;
+    }
+    .team-logo-hero {
+        max-width: 110px;
+        max-height: 110px;
+    }
+}
+
+/* Results Banner Section */
+.results-banner-section {
+    margin-top: 20px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.results-banner-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+@media (max-width: 768px) {
+    .results-banner-section {
+        flex-direction: column !important;
+        text-align: center;
+        padding-bottom: 40px !important;
+    }
+    .results-banner-art {
+        justify-content: center !important;
+        margin-top: -20px;
+        width: 100%;
+    }
+    .results-banner-art img {
+        height: 200px !important;
+        margin-right: 0 !important;
+    }
+    .results-banner-content {
+        padding: 30px 20px !important;
+        width: 100%;
+    }
+}

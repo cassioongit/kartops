@@ -1,0 +1,14 @@
+# Proteção de arquivos sensíveis
+<FilesMatch "^\.env|config\.php|mail_config\.php|.*\.log|README\.md|CONTRIBUTING\.md">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Impedir listagem de diretórios
+Options -Indexes
+
+# Bloquear acesso a arquivos ocultos (começando com ponto)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

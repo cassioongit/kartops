@@ -1,0 +1,18 @@
+{
+    "name": "KartOps",
+    "short_name": "KartOps",
+    "description": "Sistema de Gerenciamento de Campeonatos de Kart",
+    "start_url": "/home.php",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#00f2ea",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/images/logo-kartops.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

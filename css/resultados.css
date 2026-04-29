@@ -1,0 +1,471 @@
+/* Resultados Page Styles */
+.results-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+    padding-top: 120px;
+    padding-left: 5px;
+}
+
+.header-left-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Rotate Phone Hint */
+.rotate-hint {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+}
+
+.rotate-hint .phone-icon {
+    position: relative;
+    width: 44px;
+    height: 70px;
+    animation: phone-rock 2.5s ease-in-out 4;
+}
+
+.rotate-hint .phone-body {
+    width: 26px;
+    height: 44px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.rotate-hint .rotate-arrows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.rotate-hint .rotate-arrows svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--primary-color, #00d4ff);
+    opacity: 0.7;
+}
+
+@keyframes phone-rock {
+
+    0%,
+    100% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(75deg);
+    }
+}
+
+/* Show only on mobile portrait */
+@media (max-width: 768px) and (orientation: portrait) {
+    .rotate-hint {
+        display: flex;
+    }
+}
+
+.stage-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--glass-bg);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--glass-border);
+}
+
+.stage-selector select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    min-width: 250px;
+}
+
+.results-table-container {
+    background: var(--glass-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.pilot-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pilot-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+}
+
+.team-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fff;
+    /* Fallback */
+}
+
+.pos-badge {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.pos-1 {
+    background: #FFD700;
+    color: #000;
+}
+
+.pos-2 {
+    background: #C0C0C0;
+    color: #000;
+}
+
+.pos-3 {
+    background: #CD7F32;
+    color: #000;
+}
+
+.points-display {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Modal Specifics */
+.pilot-select-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Modal Styles Global Override/Fallback */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: #1a1a2e;
+    /* Dark theme bg match */
+    margin: 10% auto;
+    padding: 2px;
+    /* Border container */
+    border: 1px solid #444;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    position: relative;
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+    background: #151525;
+    /* Inner bg */
+    border-radius: 0 0 12px 12px;
+}
+
+/* Form Elements inside Modal */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color, #00d4ff);
+}
+
+.text-muted {
+    color: #888 !important;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+/* Actions Column */
+.btn-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #2a3b55;
+    /* Solid contrast background */
+    color: #ffffff !important;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    opacity: 1;
+}
+
+.btn-icon:hover {
+    background: #00d4ff;
+    border-color: #00d4ff;
+    color: #000 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-icon.delete:hover {
+    background: #ff4757;
+    border-color: #ff4757;
+    color: white !important;
+}
+
+.btn-icon i {
+    pointer-events: none;
+    display: inline-block;
+    /* Ensure dimensions */
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00d4ff 0%, #005bea 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    margin-right: 10px;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.text-right {
+    text-align: right;
+}
+
+.row {
+    display: flex;
+    margin-left: -10px;
+    margin-right: -10px;
+    gap: 15px;
+}
+
+.row .col-md-6 {
+    flex: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Pilot Styling similar to Equipes */
+.pilot-avatar-small {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-footer-custom {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer-custom .btn {
+    flex: 0 1 auto;
+    min-width: 140px;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0.75rem 1.25rem;
+}
+
+.modal-footer-custom .btn-info {
+    min-width: 200px;
+}
+
+.modal-footer-custom .btn-primary {
+    min-width: 120px;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    color: white;
+}
+
+.btn-info:hover {
+    box-shadow: 0 4px 12px rgba(0, 180, 219, 0.3);
+}
+
+/* Table Improvements */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    color: #e0e0e0;
+}
+
+.table th {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    white-space: nowrap;
+}
+
+.table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Prevent text wrapping in pilot and team names */
+.table td span {
+    white-space: nowrap;
+}
+
+.table td .d-flex {
+    white-space: nowrap;
+}
+
+/* Badge para indicar que pontua para equipe */
+.pontua-equipe-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #00c853 0%, #00a843 100%);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 50%;
+    margin-left: 4px;
+    vertical-align: middle;
+    box-shadow: 0 2px 6px rgba(0, 200, 83, 0.4);
+    cursor: help;
+}

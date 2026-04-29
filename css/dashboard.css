@@ -1,0 +1,253 @@
+/* ===== DASHBOARD.PHP - Google Account Style ===== */
+
+/* Override global dark background for Dashboard */
+body:has(.dashboard-container) {
+    background: #f0f4f8;
+    color: #202124;
+}
+
+/* Container principal — narrow e centralizado */
+.dashboard-container {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 100px 16px 60px;
+}
+
+/* ===== PROFILE SECTION ===== */
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 32px 0 24px;
+}
+
+.profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #e8eaed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 600;
+    color: #5f6368;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #202124;
+    margin: 0 0 4px;
+    line-height: 1.3;
+}
+
+.profile-email {
+    font-size: 14px;
+    color: #5f6368;
+    margin: 0;
+    word-break: break-all;
+}
+
+.profile-role-badge {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #e8f0fe;
+    color: #1a73e8;
+}
+
+/* ===== SECTION GROUP (Card container) ===== */
+.section-group {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+/* ===== NAV ITEM (Each row) ===== */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease;
+    border-bottom: 1px solid #f1f3f4;
+    cursor: pointer;
+}
+
+.nav-item:last-child {
+    border-bottom: none;
+}
+
+.nav-item:hover {
+    background: #f8f9fa;
+}
+
+.nav-item:active {
+    background: #f1f3f4;
+}
+
+/* Icon circle */
+.nav-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+}
+
+.nav-icon i {
+    font-size: 18px;
+}
+
+/* Text block */
+.nav-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.nav-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #202124;
+    line-height: 1.4;
+}
+
+.nav-description {
+    font-size: 13px;
+    color: #5f6368;
+    margin-top: 2px;
+    line-height: 1.3;
+}
+
+/* Arrow */
+.nav-arrow {
+    color: #9aa0a6;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-left: 4px;
+}
+
+/* ===== ICON COLORS ===== */
+.icon-blue {
+    background: #e8f0fe;
+    color: #1a73e8;
+}
+
+.icon-purple {
+    background: #f3e8fd;
+    color: #8430ce;
+}
+
+.icon-green {
+    background: #e6f4ea;
+    color: #1e8e3e;
+}
+
+.icon-orange {
+    background: #fef0e1;
+    color: #e37400;
+}
+
+.icon-teal {
+    background: #e0f7fa;
+    color: #00796b;
+}
+
+.icon-amber {
+    background: #fef7e0;
+    color: #ea8600;
+}
+
+.icon-pink {
+    background: #fce8ef;
+    color: #d93025;
+}
+
+.icon-indigo {
+    background: #e8eaf6;
+    color: #3f51b5;
+}
+
+.icon-cyan {
+    background: #e0f7fa;
+    color: #0097a7;
+}
+
+.icon-red {
+    background: #fce8e6;
+    color: #d93025;
+}
+
+.icon-light-green {
+    background: #e6f4ea;
+    color: #137333;
+}
+
+/* ===== LOGOUT ITEM ===== */
+.nav-item.logout-item .nav-title {
+    color: #d93025;
+}
+
+.nav-item.logout-item:hover {
+    background: #fce8e6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+    .dashboard-container {
+        padding: 90px 12px 40px;
+    }
+
+    .profile-section {
+        padding: 24px 0 16px;
+    }
+
+    .profile-avatar {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+    }
+
+    .profile-name {
+        font-size: 20px;
+    }
+
+    .nav-item {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+
+    .nav-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .nav-icon i {
+        font-size: 16px;
+    }
+}

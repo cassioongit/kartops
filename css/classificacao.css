@@ -1,0 +1,503 @@
+/* css/classificacao.css */
+
+.classification-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 120px;
+    padding-left: 5px;
+    margin-bottom: 2rem;
+}
+
+/* Rotate Phone Hint */
+.rotate-hint {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+}
+
+.rotate-hint .phone-icon {
+    position: relative;
+    width: 44px;
+    height: 70px;
+    animation: phone-rock 2.5s ease-in-out 4;
+}
+
+.rotate-hint .phone-body {
+    width: 26px;
+    height: 44px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.rotate-hint .rotate-arrows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.rotate-hint .rotate-arrows svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--primary-color, #00d4ff);
+    opacity: 0.7;
+}
+
+@keyframes phone-rock {
+
+    0%,
+    100% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(75deg);
+    }
+}
+
+/* Show only on mobile portrait */
+@media (max-width: 768px) and (orientation: portrait) {
+    .rotate-hint {
+        display: flex;
+    }
+
+    /* Esconde a foto do piloto na visualização vertical */
+    .driver-photo {
+        display: none;
+    }
+}
+
+
+.controls-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
+}
+
+
+
+/* Category Toggle (Master/Challengers) */
+.category-toggle {
+    display: flex;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.category-toggle .toggle-btn {
+    flex: 1;
+    background: transparent;
+    color: #aaa;
+}
+
+.category-toggle .toggle-btn.cat-master.active {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+.category-toggle .toggle-btn.cat-challengers.active {
+    background: #ffd700 !important;
+    color: #000 !important;
+}
+
+
+/* Toggle Switch Styling - Modern Glass Version */
+.view-toggle, .category-toggle {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px; /* Estilo pílula */
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.toggle-btn i {
+    font-size: 1.1rem;
+}
+
+/* O "Sliding Indicator" será simulado via classe active por enquanto, 
+   ou podemos usar um elemento real. Para simplicidade e rapidez: */
+.toggle-btn.active {
+    background: #4169E1; /* Royal Blue */
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(65, 105, 225, 0.4);
+}
+
+.category-toggle .toggle-btn.cat-master.active {
+    background: #4169E1 !important;
+}
+
+.category-toggle .toggle-btn.cat-challengers.active {
+    background: #4169E1 !important;
+    color: #fff !important;
+}
+
+/* =====================================================
+   COMPACT VIEW (F1 Style) - Mobile Portrait
+   ===================================================== */
+.ranking-compact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.ranking-row {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    border-radius: 4px 0 0 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Badge de posição na visualização compacta */
+.pos-badge {
+    min-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-left: 8px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.pos-badge.pos-gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1a1a1a;
+}
+
+.pos-badge.pos-silver {
+    background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+    color: #1a1a1a;
+}
+
+.pos-badge.pos-bronze {
+    background: linear-gradient(135deg, #CD7F32, #B87333);
+    color: white;
+}
+
+.team-logo-mini {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-left: -10px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    position: relative;
+    z-index: 2;
+}
+
+
+
+.driver-name {
+    flex: 1;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    padding-left: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.driver-photo {
+    width: 100px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    flex-shrink: 0;
+}
+
+
+.points-box {
+    min-width: 80px;
+    background: white;
+    color: black;
+    font-size: 1.6rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+/* Layout especial para equipes na visualização compacta */
+.ranking-row-team {
+    height: 105px;
+    justify-content: center;
+}
+
+.team-logo-full {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 95px;
+    object-fit: contain;
+    padding: 8px 10px;
+}
+
+.loading-placeholder,
+.no-data {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+}
+
+/* =====================================================
+   TABLE VIEW (Desktop / Landscape)
+   ===================================================== */
+.classification-table-wrapper {
+    background: var(--glass-bg, rgba(28, 30, 50, 0.95));
+    border-radius: 12px;
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #e0e0e0;
+}
+
+.compact-col {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.table th {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 10px;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+.table th.text-left {
+    text-align: left;
+}
+
+.table td {
+    padding: 4px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+    text-align: left;
+}
+
+.table td.text-left {
+    text-align: left;
+}
+
+.table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Entity Cell (Pilot/Team) */
+.entity-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.team-logo-table {
+    width: 60px;
+    height: 40px;
+    object-fit: contain;
+}
+
+
+
+.entity-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 15%; /* Ajustado para mostrar levemente acima do centro */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: block; /* Garante visibilidade */
+}
+
+.team-avatar {
+    width: 120px;
+    height: 80px;
+    border-radius: 0;
+    object-fit: contain;
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.entity-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.entity-name {
+    font-weight: 600;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.entity-sub {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Position Badges */
+.pos-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 !important;
+}
+
+.pos-1 {
+    background: #FFD700;
+    color: black;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.pos-2 {
+    background: #C0C0C0;
+    color: black;
+}
+
+.pos-3 {
+    background: #CD7F32;
+    color: black;
+}
+
+/* Total Points */
+.total-points {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary-color, #00d4ff);
+}
+
+/* Stage Point */
+.stage-pt {
+    color: #ccc;
+}
+
+.stage-pt.zero {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* =====================================================
+   RESPONSIVE RULES
+   ===================================================== */
+
+/* Mobile Portrait: Show Compact, Hide Table */
+@media (max-width: 768px) and (orientation: portrait) {
+    #ranking-compact {
+        display: block;
+    }
+
+    #ranking-table {
+        display: none;
+    }
+}
+
+/* Desktop / Landscape: Show Table, Hide Compact */
+@media (min-width: 769px),
+(orientation: landscape) {
+    #ranking-compact {
+        display: none;
+    }
+
+    #ranking-table {
+        display: block;
+    }
+}
+
+/* Extra small screens adjustments */
+@media (max-width: 400px) {
+    .driver-name {
+        font-size: 1rem;
+        padding-left: 10px;
+    }
+
+    .team-logo-mini {
+        width: 35px;
+        height: 35px;
+        margin-left: 5px;
+    }
+
+    .driver-photo {
+        width: 55px;
+    }
+
+    .points-box {
+        min-width: 65px;
+        font-size: 1.3rem;
+    }
+
+    .ranking-row {
+        height: 48px;
+    }
+}

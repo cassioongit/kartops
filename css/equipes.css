@@ -1,0 +1,404 @@
+/* css/equipes.css */
+
+/* Garantir que o body tenha transição suave de cor */
+body {
+    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #000000;
+    overflow-x: hidden;
+}
+
+.equipes-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    padding-top: 160px;
+    padding-bottom: 60px;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+}
+
+/* Navegação Estilo Minimalista (Igual Pilotos) */
+.nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.5rem;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+}
+
+.prev-btn { left: 40px; }
+.next-btn { right: 40px; }
+
+/* Botão Voltar */
+.btn-back-equipes {
+    position: fixed;
+    top: 100px;
+    left: 40px;
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.btn-back-equipes:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-5px);
+}
+
+/* Botão Adicionar (Admin) */
+.top-actions {
+    position: fixed;
+    top: 100px;
+    right: 40px;
+    z-index: 101;
+}
+
+.btn-add-team {
+    background: linear-gradient(135deg, #00f2ea 0%, #007adf 100%);
+    color: white;
+    border: none;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 242, 234, 0.3);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-add-team:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 12px 30px rgba(0, 242, 234, 0.5);
+}
+
+/* Glassmorphism Card da Equipe */
+.team-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Brilho ao passar o mouse */
+.team-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: skewX(-25deg);
+    transition: 0.75s;
+}
+
+.team-card:hover::before {
+    left: 150%;
+}
+
+.team-logo {
+    width: auto;
+    max-width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    margin: 0 auto 25px;
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-logo {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.team-name {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+/* Stats Section */
+.team-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.stat-box:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* Membros da Equipe Section */
+.team-pilots-section {
+    text-align: left;
+    margin-top: 25px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.team-pilots-section h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pilots-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pilot-mini-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.pilot-mini-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.pilot-info-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pilot-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pilot-badge-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.pilot-name-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pilot-rank-pts {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+}
+
+.p-cat {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.p-rank {
+    color: #ffeb3b;
+    font-weight: 800;
+}
+
+.pilot-stats-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.pilot-medals {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.medal-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.medal-item i {
+    font-size: 14px;
+}
+
+.gold i { color: #FFD700; transform: scale(1.1); filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
+.silver i { color: #E0E0E0; }
+.bronze i { color: #CD7F32; }
+
+.podio-icon-mini {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: brightness(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .equipes-wrapper {
+        padding-top: 140px;
+    }
+
+    .team-card {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .team-name {
+        font-size: 1.5rem;
+    }
+
+    .nav-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+
+    .btn-back-equipes {
+        top: 80px;
+        left: 20px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .top-actions {
+        top: 80px;
+        right: 20px;
+    }
+
+    .btn-add-team {
+        width: 44px;
+        height: 44px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Botão Editar Flutuante no Card */
+.btn-edit-team {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 5;
+    color: white;
+}
+
+.btn-edit-team:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: rotate(15deg);
+}

@@ -1,0 +1,6 @@
+mail_config.php
+config.php
+.env
+.DS_Store
+*.log
+sessions/

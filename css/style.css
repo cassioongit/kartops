@@ -1,0 +1,503 @@
+/**
+ * =====================================================
+ * KARTOPS - Estilos Globais
+ * =====================================================
+ * Mobile-First Design (75% dos acessos são mobile)
+ */
+
+/* ===== GLOBAL - RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== GLOBAL - BODY ===== */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #000000;
+    min-height: 100vh;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ===== GLOBAL - HEADER (includes/header.php) ===== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 15, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 12px 20px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #1a1a1a;
+}
+
+/* ===== GLOBAL - USER MENU / AVATAR (includes/header.php) ===== */
+.user-menu {
+    position: relative;
+}
+
+.user-avatar-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.user-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s;
+}
+
+.user-avatar:hover {
+    transform: scale(1.1);
+    border-color: white;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    background: #1a2535;
+    /* Dark theme background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+    z-index: 100;
+}
+
+.user-dropdown::-webkit-scrollbar {
+    width: 4px;
+}
+
+.user-dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.user-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+.user-menu.active .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-header {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #121926;
+    /* Slightly darker header */
+}
+
+.dropdown-user-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.dropdown-user-email {
+    font-size: 12px;
+    color: #94a3b8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdown-menu {
+    list-style: none;
+    padding: 8px;
+    margin: 0;
+}
+
+.dropdown-link {
+    display: block;
+    padding: 10px 12px;
+    color: #e2e8f0;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-link:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    /* A subtle light overlay instead of bold color var */
+    color: #ffffff;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+    margin: 8px 0;
+}
+
+.dropdown-link.logout {
+    color: #ef4444;
+    /* Standard red error/logout color */
+}
+
+.dropdown-link.logout:hover {
+    background: rgba(239, 68, 68, 0.15);
+    /* Light red tint */
+    color: #fca5a5;
+}
+
+.dropdown-link--disabled {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #94a3b8;
+    /* Faded color instead of dark grey */
+    opacity: 0.5;
+    /* Mantenho a opacidade um pouco visivel */
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
+}
+
+.btn-login {
+    padding: 10px 24px;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== GLOBAL - FOOTER (includes/footer.php) ===== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+/* ===== GLOBAL - BOTÃO VOLTAR PARA HOME ===== */
+.btn-back-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.btn-back-home:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(-3px);
+}
+
+.btn-back-home svg {
+    stroke: currentColor;
+}
+
+/* Variação para fundo claro */
+.maintenance-card .btn-back-home,
+.pontuacao-container .btn-back-home {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.3);
+    color: #667eea;
+}
+
+.maintenance-card .btn-back-home:hover,
+.pontuacao-container .btn-back-home:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.5);
+}
+
+/* Header com botão voltar e título */
+.header-left-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* ===== HOME.PHP - WELCOME MESSAGE ===== */
+.welcome-message {
+    max-width: 900px;
+    margin: 170px auto 30px;
+    padding: 20px 32px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    text-align: center;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.welcome-message h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ... (skip animation) ... */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== INDEX.PHP - HERO SECTION ===== */
+.hero {
+    padding: 20px 20px 60px;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    line-height: 1.1;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 48px;
+    max-width: 600px;
+}
+
+/* ===== INDEX.PHP - PRÓXIMA ETAPA ===== */
+.proxima-etapa {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 40px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.etapa-label {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.etapa-nome {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.etapa-local {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 24px;
+}
+
+/* ===== INDEX.PHP - COUNTDOWN TIMER ===== */
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 16px 8px;
+}
+
+.countdown-value {
+    font-size: 32px;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.countdown-label {
+    font-size: 11px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===== GLOBAL - RESPONSIVE MOBILE-FIRST ===== */
+@media (max-width: 768px) {
+
+    /* HOME.PHP - Welcome message mobile */
+    .welcome-message {
+        margin: 110px 20px 30px;
+        padding: 20px 24px;
+    }
+
+    .welcome-message h2 {
+        font-size: 20px;
+    }
+
+    /* INDEX.PHP - Mobile adjustments */
+    h1 {
+        font-size: 36px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .proxima-etapa {
+        padding: 24px;
+    }
+
+    .etapa-nome {
+        font-size: 20px;
+    }
+
+    .countdown {
+        gap: 8px;
+    }
+
+    .countdown-item {
+        padding: 12px 4px;
+    }
+
+    .countdown-value {
+        font-size: 24px;
+    }
+
+    .countdown-label {
+        font-size: 9px;
+    }
+
+    /* GLOBAL - Header mobile */
+    .logo {
+        font-size: 18px;
+    }
+
+    /* Menu dropdown mobile - scrollable */
+    .user-dropdown {
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .user-dropdown::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .user-dropdown::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .user-dropdown::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 4px;
+    }
+
+    .dropdown-link {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .dropdown-link--disabled {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .dropdown-divider {
+        margin: 4px 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* INDEX.PHP - Extra small screens */
+    h1 {
+        font-size: 28px;
+    }
+
+    .countdown-value {
+        font-size: 20px;
+    }
+}
