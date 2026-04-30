@@ -4,7 +4,9 @@
  * Busca a imagem server-side (sem restrições de autenticação do browser)
  * e repassa com cache de 1 hora.
  */
-if (!isset($_SESSION['user_id'])) {
+require_once __DIR__ . '/config/config.php';
+
+if (!isset($_SESSION['user_id']) && !isset($_SESSION['is_guest'])) {
     http_response_code(401);
     exit('Unauthorized');
 }
