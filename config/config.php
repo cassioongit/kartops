@@ -58,7 +58,7 @@ header("X-XSS-Protection: 1; mode=block");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("Permissions-Policy: geolocation=(), microphone=(), camera=()");
 // CSP básica
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' data: lh3.googleusercontent.com blob:; connect-src 'self' https://accounts.google.com; frame-src 'self' https://accounts.google.com;");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' data: lh3.googleusercontent.com blob:; connect-src 'self' https://accounts.google.com; frame-src 'self' https://accounts.google.com https://www.youtube.com;");
 
 // Configurações de Sessão
 define('SESSION_NAME', 'kartops_session');
