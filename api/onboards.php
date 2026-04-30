@@ -13,7 +13,6 @@ ob_start();
 @require_once __DIR__ . '/../config/config.php';
 
 // Iniciar sessão DEPOIS de carregar as configurações
-@session_start();
 require_once __DIR__ . '/../includes/csrf.php';
 
 // Limpar qualquer output (warnings) antes de enviar JSON
@@ -179,7 +178,8 @@ if ($action === 'list' && $method === 'GET') {
 
     } catch (PDOException $e) {
         http_response_code(500);
-        echo json_encode(['success' => false, 'message' => 'Erro ao buscar onboards: ' . $e->getMessage()]);
+        error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
     }
     exit;
 }
@@ -390,7 +390,8 @@ if ($action === 'create' && $method === 'POST') {
 
     } catch (PDOException $e) {
         http_response_code(500);
-        echo json_encode(['success' => false, 'message' => 'Erro ao cadastrar onboard: ' . $e->getMessage()]);
+        error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
     }
     exit;
 }

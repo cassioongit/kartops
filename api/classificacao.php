@@ -290,5 +290,6 @@ try {
 
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
 }

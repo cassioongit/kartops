@@ -4,9 +4,6 @@
  * RECUPERAR SENHA - KartOps
  * =====================================================
  */
-
-session_start();
-
 require_once 'config/config.php';
 require_once 'includes/mail_helper.php';
 require_once 'includes/csrf.php';

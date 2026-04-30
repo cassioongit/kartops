@@ -11,8 +11,6 @@ require_once __DIR__ . '/../includes/mail_helper.php';
 
 // Iniciar sessão se não estiver iniciada
 if (session_status() === PHP_SESSION_NONE) {
-    session_name(SESSION_NAME);
-    session_start();
 }
 require_once __DIR__ . '/../includes/csrf.php';
 

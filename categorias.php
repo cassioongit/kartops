@@ -113,7 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
     } catch (PDOException $e) {
-        $error = 'Erro no banco de dados: ' . $e->getMessage();
+        error_log("[KartOps] Erro: " . $e->getMessage());
+$error = 'Erro interno do servidor. Tente novamente mais tarde.';
     }
 }
 

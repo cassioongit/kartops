@@ -40,7 +40,8 @@ try {
     $stmt->execute();
     $usuarios = $stmt->fetchAll();
 } catch (PDOException $e) {
-    $error = "Erro ao carregar usuários: " . $e->getMessage();
+    error_log("[KartOps] Erro: " . $e->getMessage());
+$error = 'Erro interno do servidor. Tente novamente mais tarde.';
     $usuarios = [];
 }
 ?>

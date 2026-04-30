@@ -17,9 +17,6 @@ session_set_cookie_params([
     'httponly' => true,
     'samesite' => 'Lax'
 ]);
-
-session_start();
-
 // Gerar CSRF token se não existir
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -42,9 +39,24 @@ $contato_emergencia_telefone = '';
 $avatar_url = '';
 $optin = 1;
 
+// Rate Limiting Básico de Registro
+$ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+$rate_limit_key = 'register_attempts_' . md5($ip);
+$rate_limit_time_key = 'register_attempts_time_' . md5($ip);
+
+$attempts = $_SESSION[$rate_limit_key] ?? 0;
+$last_attempt = $_SESSION[$rate_limit_time_key] ?? 0;
+
+if (time() - $last_attempt > 3600) {
+    $attempts = 0;
+    $_SESSION[$rate_limit_key] = 0;
+}
+
 // Processar formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!validateCsrfToken()) {
+    if ($attempts >= 10) {
+        $error = 'Muitos registros a partir deste IP. Aguarde 1 hora.';
+    } else if (!validateCsrfToken()) {
         $error = 'Sessão expirada ou inválida. Por favor, tente novamente.';
     } else {
         $nome = trim($_POST['nome']);
@@ -75,9 +87,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
                     $stmt->execute([$email]);
                     if ($stmt->fetch()) {
-                        $error = 'Este e-mail já está cadastrado. <a href="index.php" style="color:white;text-decoration:underline;">Fazer login?</a>';
+                        $error = 'Este e-mail já possui cadastro. <a href="index.php" style="color:white;text-decoration:underline;">Fazer login?</a>';
                     } else {
-                        $userId = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000, mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff));
+                        $userId = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', random_int(0, 0xffff), random_int(0, 0xffff), random_int(0, 0xffff), random_int(0, 0x0fff) | 0x4000, random_int(0, 0x3fff) | 0x8000, random_int(0, 0xffff), random_int(0, 0xffff), random_int(0, 0xffff));
                         $hash = password_hash($senha, PASSWORD_DEFAULT);
 
                         $stmt = $pdo->prepare("INSERT INTO usuarios (id, nome, email, senha_hash, telefone, contato_emergencia_nome, contato_emergencia_telefone, avatar_url, optin_news, role, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Usuário', 1)");
@@ -90,11 +102,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['user_email'] = $email;
                         $_SESSION['user_name'] = $nome;
                         $_SESSION['user_role'] = 'Usuário';
+                        $_SESSION[$rate_limit_key] = $attempts + 1;
+                        $_SESSION[$rate_limit_time_key] = time();
 
                         echo "<script>setTimeout(() => { window.location.href = 'home.php'; }, 2000);</script>";
                     }
                 } catch (PDOException $e) {
-                    $error = 'Erro ao criar conta: ' . $e->getMessage();
+                    error_log("[KartOps] Erro ao criar conta: " . $e->getMessage());
+                    $error = 'Erro interno do servidor ao criar conta. Tente novamente mais tarde.';
                 }
             }
         }

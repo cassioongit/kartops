@@ -19,10 +19,6 @@ session_set_cookie_params([
     'httponly' => true,
     'samesite' => 'Lax'
 ]);
-
-session_name('kartops_session');
-session_start();
-
 // Criar sessão de visitante
 $_SESSION['user_id'] = 'visitor_' . uniqid(); // ID temporário único
 $_SESSION['user_email'] = 'visitante@KartOps.com';

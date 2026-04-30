@@ -56,7 +56,8 @@ try {
     }
 
 } catch (PDOException $e) {
-    echo "<div style='color: white; padding: 100px;'>Erro de Banco de Dados: " . htmlspecialchars($e->getMessage()) . "</div>";
+    error_log("[KartOps] Erro de DB em pilotos: " . $e->getMessage());
+    echo "<div style='color: white; padding: 100px;'>Erro interno do servidor. Tente novamente mais tarde.</div>";
     exit;
 }
 ?>

@@ -7,9 +7,6 @@
 
 // Incluir conexão para limpar token do banco (opcional, mas bom para Single Session)
 require_once 'config/config.php';
-
-session_start();
-
 // Limpar token no banco se estiver logado
 if (isset($_SESSION['user_id'])) {
     try {

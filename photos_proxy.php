@@ -4,6 +4,10 @@
  * Busca a imagem server-side (sem restrições de autenticação do browser)
  * e repassa com cache de 1 hora.
  */
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+    exit('Unauthorized');
+}
 
 // Só aceita IDs que sejam alfanuméricos + _ + -
 $id = $_GET['id'] ?? '';

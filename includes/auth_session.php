@@ -26,9 +26,6 @@ if (session_status() === PHP_SESSION_NONE) {
         'httponly' => true,
         'samesite' => 'Lax'
     ]);
-
-    session_name(SESSION_NAME);
-    session_start();
 }
 
 // Buscar dados do usuário se estiver logado

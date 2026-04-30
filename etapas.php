@@ -37,7 +37,8 @@ try {
     $stmt->execute();
     $etapas = $stmt->fetchAll();
 } catch (PDOException $e) {
-    $error = "Erro ao carregar etapas: " . $e->getMessage();
+    error_log("[KartOps] Erro: " . $e->getMessage());
+$error = 'Erro interno do servidor. Tente novamente mais tarde.';
     $etapas = [];
 }
 

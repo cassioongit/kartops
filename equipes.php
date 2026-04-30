@@ -36,7 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $msg = "Equipe atualizada com sucesso!";
                 $msgType = "success";
             } catch (PDOException $e) {
-                $msg = "Erro ao atualizar: " . $e->getMessage();
+                error_log("[KartOps] Erro: " . $e->getMessage());
+$msg = 'Erro interno do servidor. Tente novamente mais tarde.';
                 $msgType = "error";
             }
         }
@@ -58,7 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     $msg = "Equipe criada com sucesso!";
                     $msgType = "success";
                 } catch (PDOException $e) {
-                    $msg = "Erro ao criar equipe: " . $e->getMessage();
+                    error_log("[KartOps] Erro: " . $e->getMessage());
+$msg = 'Erro interno do servidor. Tente novamente mais tarde.';
                     $msgType = "error";
                 }
             } else {
@@ -80,7 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     $msgType = "success";
                 }
             } catch (PDOException $e) {
-                $msg = "Erro ao adicionar piloto: " . $e->getMessage();
+                error_log("[KartOps] Erro: " . $e->getMessage());
+$msg = 'Erro interno do servidor. Tente novamente mais tarde.';
                 $msgType = "error";
             }
         }
@@ -97,7 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     $msgType = "success";
                 }
             } catch (PDOException $e) {
-                $msg = "Erro ao remover piloto: " . $e->getMessage();
+                error_log("[KartOps] Erro: " . $e->getMessage());
+$msg = 'Erro interno do servidor. Tente novamente mais tarde.';
                 $msgType = "error";
             }
         }
@@ -280,7 +284,8 @@ try {
 
 } catch (PDOException $e) {
     // Show error
-    echo "<div style='background:red;color:white;padding:10px;'>Erro DB: " . htmlspecialchars($e->getMessage()) . "</div>";
+    error_log("[KartOps] Erro DB em equipes: " . $e->getMessage());
+    echo "<div style='background:red;color:white;padding:10px;'>Erro interno de banco de dados. Tente novamente mais tarde.</div>";
 }
 
 

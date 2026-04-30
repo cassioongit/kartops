@@ -7,19 +7,6 @@
 
 require_once 'config/config.php';
 
-// Configurar persistência (15 dias)
-$lifetime = 3600 * 24 * 15; // 15 dias
-ini_set('session.gc_maxlifetime', $lifetime);
-session_set_cookie_params([
-    'lifetime' => $lifetime,
-    'path' => '/',
-    'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on',
-    'httponly' => true,
-    'samesite' => 'Lax'
-]);
-
-session_name('kartops_session');
-session_start();
 
 // Gerar CSRF token
 if (!isset($_SESSION['csrf_token'])) {
@@ -59,39 +46,59 @@ $step = $_GET['step'] ?? 'email';
 $error = $_GET['error'] ?? $_GET['msg'] ?? '';
 $email = $_SESSION['login_email'] ?? '';
 
+// Rate Limiting Básico de Login
+$ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+$rate_limit_key = 'login_attempts_' . md5($ip);
+$rate_limit_time_key = 'login_attempts_time_' . md5($ip);
+
+$attempts = $_SESSION[$rate_limit_key] ?? 0;
+$last_attempt = $_SESSION[$rate_limit_time_key] ?? 0;
+
+if (time() - $last_attempt > 900) {
+    $attempts = 0;
+    $_SESSION[$rate_limit_key] = 0;
+}
+
 // Processar formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once 'includes/csrf.php';
-    if (!validateCsrfToken()) {
-        $error = 'Sessão expirada ou inválida. Por favor, tente novamente.';
-    } elseif (isset($_POST['email'])) {
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['login_email'] = $email;
-            header('Location: index.php?step=password');
-            exit;
-        } else {
-            $error = 'Email inválido';
-        }
-    } elseif (isset($_POST['password'])) {
-        $password = $_POST['password'];
-        $email = $_SESSION['login_email'] ?? '';
-        $pdo = getDBConnection();
-        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ? AND ativo = 1");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
+    if ($attempts >= 5) {
+        $error = 'Muitas tentativas falhas. Aguarde 15 minutos.';
+    } else {
+        require_once 'includes/csrf.php';
+        if (!validateCsrfToken()) {
+            $error = 'Sessão expirada ou inválida. Por favor, tente novamente.';
+        } elseif (isset($_POST['email'])) {
+            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $_SESSION['login_email'] = $email;
+                header('Location: index.php?step=password');
+                exit;
+            } else {
+                $error = 'Email inválido';
+            }
+        } elseif (isset($_POST['password'])) {
+            $password = $_POST['password'];
+            $email = $_SESSION['login_email'] ?? '';
+            $pdo = getDBConnection();
+            $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ? AND ativo = 1");
+            $stmt->execute([$email]);
+            $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['senha_hash'])) {
-            session_regenerate_id(true);
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_name'] = $user['nome'];
-            $_SESSION['user_role'] = $user['role'];
-            unset($_SESSION['login_email']);
-            header('Location: home.php');
-            exit;
-        } else {
-            $error = 'Senha incorreta ou usuário não encontrado.';
+            if ($user && password_verify($password, $user['senha_hash'])) {
+                $_SESSION[$rate_limit_key] = 0;
+                session_regenerate_id(true);
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_name'] = $user['nome'];
+                $_SESSION['user_role'] = $user['role'];
+                unset($_SESSION['login_email']);
+                header('Location: home.php');
+                exit;
+            } else {
+                $_SESSION[$rate_limit_key] = $attempts + 1;
+                $_SESSION[$rate_limit_time_key] = time();
+                $error = 'Senha incorreta ou usuário não encontrado.';
+            }
         }
     }
 }

@@ -12,9 +12,6 @@
 
 header('Content-Type: application/json');
 require_once __DIR__ . '/../config/config.php';
-
-session_start();
-
 // Verificar se quer categorias detalhadas ou agrupadas
 $detailed = isset($_GET['detailed']) && $_GET['detailed'] === 'true';
 

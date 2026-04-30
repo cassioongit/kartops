@@ -1,9 +1,5 @@
 <?php
 require_once 'config/config.php';
-
-session_name('kartops_session');
-session_start();
-
 if (!isset($_GET['code'])) {
     // Redireciona com erro
     header('Location: index.php?error=Processo+cancelado+ou+erro+na+autenticacao');

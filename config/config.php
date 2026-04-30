@@ -51,6 +51,15 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
+// HEADERS DE SEGURANÇA
+header("X-Frame-Options: SAMEORIGIN");
+header("X-Content-Type-Options: nosniff");
+header("X-XSS-Protection: 1; mode=block");
+header("Referrer-Policy: strict-origin-when-cross-origin");
+header("Permissions-Policy: geolocation=(), microphone=(), camera=()");
+// CSP básica
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' data: lh3.googleusercontent.com blob:; connect-src 'self' https://accounts.google.com; frame-src 'self' https://accounts.google.com;");
+
 // Configurações de Sessão
 define('SESSION_NAME', 'kartops_session');
 define('SESSION_LIFETIME', 3600 * 24 * 15); // 15 dias
@@ -95,6 +104,13 @@ function getDBConnection()
 
         return $pdo;
     } catch (PDOException $e) {
-        die("Erro de conexão: " . $e->getMessage());
+        error_log("[KartOps] Erro Fatal: " . $e->getMessage());
+    die('Erro interno. Tente novamente.');
     }
 }
+
+// Iniciar sessão de forma unificada para toda a aplicação após configurações de cookie e ini
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>

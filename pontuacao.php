@@ -32,7 +32,8 @@ try {
     $stmt->execute();
     $pontuacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    $error = "Erro ao carregar dados: " . $e->getMessage();
+    error_log("[KartOps] Erro: " . $e->getMessage());
+$error = 'Erro interno do servidor. Tente novamente mais tarde.';
     $pontuacoes = [];
 }
 

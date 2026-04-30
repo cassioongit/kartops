@@ -13,7 +13,6 @@ ob_start();
 @require_once __DIR__ . '/../config/config.php';
 
 // Iniciar sessão DEPOIS de carregar as configurações
-@session_start();
 require_once __DIR__ . '/../includes/csrf.php';
 require_once __DIR__ . '/../includes/mail_helper.php';
 require_once __DIR__ . '/../includes/image_helper.php';
@@ -135,14 +134,14 @@ try {
             // Gerar UUID
             $uuid = sprintf(
                 '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-                mt_rand(0, 0xffff),
-                mt_rand(0, 0xffff),
-                mt_rand(0, 0xffff),
-                mt_rand(0, 0x0fff) | 0x4000,
-                mt_rand(0, 0x3fff) | 0x8000,
-                mt_rand(0, 0xffff),
-                mt_rand(0, 0xffff),
-                mt_rand(0, 0xffff)
+                random_int(0, 0xffff),
+                random_int(0, 0xffff),
+                random_int(0, 0xffff),
+                random_int(0, 0x0fff) | 0x4000,
+                random_int(0, 0x3fff) | 0x8000,
+                random_int(0, 0xffff),
+                random_int(0, 0xffff),
+                random_int(0, 0xffff)
             );
 
             // Criar usuário
@@ -270,7 +269,8 @@ try {
                 }
             } catch (PDOException $e) {
                 http_response_code(500);
-                echo json_encode(['success' => false, 'message' => 'Erro ao excluir usuário: ' . $e->getMessage()]);
+                error_log("[KartOps] DB Error: " . $e->getMessage());
+                echo json_encode(['success' => false, 'message' => 'Erro interno ao excluir usuário']);
             }
             break;
 
@@ -281,12 +281,14 @@ try {
     }
 } catch (PDOException $e) {
     http_response_code(500);
-    $response = json_encode(['success' => false, 'message' => 'Erro ao processar requisição: ' . $e->getMessage()]);
+    error_log("[KartOps] DB Error: " . $e->getMessage());
+    $response = json_encode(['success' => false, 'message' => 'Erro interno ao processar requisição']);
     ob_clean();
     echo $response;
 } catch (Exception $e) {
     http_response_code(500);
-    $response = json_encode(['success' => false, 'message' => 'Erro inesperado: ' . $e->getMessage()]);
+    error_log("[KartOps] Server Error: " . $e->getMessage());
+    $response = json_encode(['success' => false, 'message' => 'Erro interno inesperado']);
     ob_clean();
     echo $response;
 }

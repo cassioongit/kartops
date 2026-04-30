@@ -21,8 +21,6 @@ require_once __DIR__ . '/../config/config.php';
 
 // Iniciar sessão se não estiver iniciada
 if (session_status() === PHP_SESSION_NONE) {
-    session_name(SESSION_NAME);
-    session_start();
 }
 require_once __DIR__ . '/../includes/csrf.php';
 
@@ -44,7 +42,8 @@ try {
         exit;
     }
 } catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => 'Erro de conexão: ' . $e->getMessage()]);
+    error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
     exit;
 }
 
@@ -165,7 +164,8 @@ function createEtapa($pdo, $input, $usuario)
         ]);
 
     } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Erro ao criar etapa: ' . $e->getMessage()]);
+        error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
     }
 }
 
@@ -222,7 +222,8 @@ function updateEtapa($pdo, $input, $usuario)
         echo json_encode(['success' => true, 'message' => 'Etapa atualizada com sucesso']);
 
     } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Erro ao atualizar etapa: ' . $e->getMessage()]);
+        error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
     }
 }
 
@@ -253,7 +254,8 @@ function deleteEtapa($pdo, $input, $usuario)
         echo json_encode(['success' => true, 'message' => 'Etapa excluída com sucesso']);
 
     } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Erro ao excluir etapa: ' . $e->getMessage()]);
+        error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
     }
 }
 
@@ -280,7 +282,8 @@ function getEtapa($pdo, $input)
         echo json_encode(['success' => true, 'etapa' => $etapa]);
 
     } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Erro ao buscar etapa: ' . $e->getMessage()]);
+        error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
     }
 }
 
@@ -296,7 +299,8 @@ function listEtapas($pdo)
         echo json_encode(['success' => true, 'etapas' => $etapas]);
 
     } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Erro ao listar etapas: ' . $e->getMessage()]);
+        error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
     }
 }
 ?>

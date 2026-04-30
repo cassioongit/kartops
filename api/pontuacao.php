@@ -8,7 +8,6 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/../config/config.php';
 
 // Iniciar sessão
-session_start();
 require_once __DIR__ . '/../includes/csrf.php';
 
 // Verificar autenticação
@@ -111,6 +110,7 @@ try {
 
 } catch (Exception $e) {
     http_response_code(400); // Bad Request
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    error_log("[KartOps] Erro: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro interno do servidor.']);
 }
 ?>

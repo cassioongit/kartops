@@ -105,7 +105,8 @@ try {
     }
 
 } catch (Exception $e) {
-    $error = $e->getMessage();
+    error_log("[KartOps] Erro: " . $e->getMessage());
+$error = 'Erro interno do servidor. Tente novamente mais tarde.';
 }
 
 require_once 'includes/header.php';

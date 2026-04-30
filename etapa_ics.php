@@ -42,5 +42,6 @@ try {
     echo "END:VCALENDAR\r\n";
 
 } catch (Exception $e) {
-    die("Erro ao gerar calendário: " . $e->getMessage());
+    error_log("[KartOps] Erro Fatal: " . $e->getMessage());
+    die('Erro interno. Tente novamente.');
 }
