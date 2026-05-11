@@ -12,6 +12,11 @@ require_once 'config/config.php';
 require_once 'includes/patrocinadores.php';
 require_once 'includes/classificacao_helper.php';
 
+// Garante acesso público mínimo para que o photos_proxy.php não retorne 401
+if (!isset($_SESSION['user_id']) && !isset($_SESSION['is_guest'])) {
+    $_SESSION['is_guest'] = true;
+}
+
 try {
     $pdo = getDBConnection();
 
@@ -212,8 +217,15 @@ require_once 'includes/header.php';
                     ?>
                     <div class="calendar-links" style="display: flex; justify-content: center; gap: 15px; margin-top: 5px;">
                         <span style="font-size: 11px; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; display: flex; align-items: center;">Adicionar ao calendário:</span>
-                        <a href="<?= $googleCalUrl ?>" target="_blank" title="Google Calendar" style="display: flex; align-items: center; transition: transform 0.2s;">
-                           <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg" style="width: 20px; height: 20px;" alt="Google">
+                        <a href="<?= $googleCalUrl ?>" target="_blank" rel="noopener noreferrer" title="Google Calendar" style="display: flex; align-items: center; transition: transform 0.2s;">
+                           <svg viewBox="0 0 512 512" style="width: 20px; height: 20px;" aria-label="Google Calendar" role="img" xmlns="http://www.w3.org/2000/svg">
+                               <path fill="#4285F4" d="M100 48h312c22.1 0 40 17.9 40 40v324c0 22.1-17.9 40-40 40H100c-22.1 0-40-17.9-40-40V88c0-22.1 17.9-40 40-40z"/>
+                               <path fill="#FFFFFF" d="M124 140h264c13.3 0 24 10.7 24 24v204c0 13.3-10.7 24-24 24H124c-13.3 0-24-10.7-24-24V164c0-13.3 10.7-24 24-24z"/>
+                               <path fill="#34A853" d="M412 116H100V88c0-22.1 17.9-40 40-40h232c22.1 0 40 17.9 40 40v28z"/>
+                               <path fill="#EA4335" d="M160 32c8.8 0 16 7.2 16 16v56c0 8.8-7.2 16-16 16s-16-7.2-16-16V48c0-8.8 7.2-16 16-16zm192 0c8.8 0 16 7.2 16 16v56c0 8.8-7.2 16-16 16s-16-7.2-16-16V48c0-8.8 7.2-16 16-16z"/>
+                               <path fill="#FBBC05" d="M256 204c28.7 0 52 23.3 52 52v24h-52c-28.7 0-52-23.3-52-52s23.3-52 52-52z"/>
+                               <path fill="#4285F4" d="M308 280v28c0 28.7-23.3 52-52 52s-52-23.3-52-52h104c0-9.7 0-18.9 0-28z"/>
+                           </svg>
                         </a>
                         <a href="etapa_ics.php?id=<?= $nextEvent['id'] ?>" title="Apple Calendar" style="display: flex; align-items: center; transition: transform 0.2s;">
                            <svg viewBox="0 0 384 512" style="width: 20px; height: 20px; fill: #ffffff;" xmlns="http://www.w3.org/2000/svg"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>

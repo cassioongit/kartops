@@ -84,6 +84,26 @@ require_once 'includes/header.php';
                     </tbody>
                 </table>
             </div>
+            <div id="disclaimer-desempate" class="disclaimer-desempate" style="display:none;">
+                <strong>Critérios de desempate (§5.4 — OsKarteiro 2026):</strong><br>
+                <b>A</b> Maior nº de participações &nbsp;·&nbsp;
+                <b>B</b> Menor nº de advertências &nbsp;·&nbsp;
+                <b>C</b> Melhor soma de colocações &nbsp;·&nbsp;
+                <b>D</b> Maior nº de vitórias &nbsp;·&nbsp;
+                <b>F</b> Maior nº de 2ºs lugares e assim sucessivamente &nbsp;·&nbsp;
+                <b>G</b> Sorteio<br>
+                <span style="color:#666; font-size:0.72rem;">
+                    Etapas com ✕ foram descartadas e não somam ao total.
+                    O badge <span class="tiebreak-badge" style="position:static;">X</span> ao lado da posição indica o critério que separou o piloto do colocado acima.
+                </span>
+            </div>
+        </div>
+
+        <div id="disclaimer-geral-equipes" class="disclaimer-geral-equipes" style="display:none;">
+            <strong>Pontuação Geral de Equipes:</strong><br>
+            Na classificação geral por equipes, a soma da categoria <b>Master</b> recebe peso <b>1,3</b>,
+            enquanto a soma da categoria <b>Challengers</b> recebe peso <b>1,0</b>. Por isso, os pontos
+            vindos da Master aparecem maiores no total geral.
         </div>
     </div>
 </div>
@@ -91,6 +111,7 @@ require_once 'includes/header.php';
 <script>
     let currentView = 'pilotos';
     let currentCategory = 'Challengers';
+    let availableCategories = [];
 
     document.addEventListener('DOMContentLoaded', () => {
         loadFilters();
@@ -98,9 +119,16 @@ require_once 'includes/header.php';
 
     function setView(view) {
         currentView = view;
+        if (view === 'equipes') {
+            currentCategory = 'Geral';
+        } else if (currentCategory === 'Geral') {
+            const challengersOption = availableCategories.find(name => name.includes('Challenger') || name.includes('Challenge'));
+            currentCategory = challengersOption || availableCategories[0] || '';
+        }
         document.querySelectorAll('.view-toggle .toggle-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.view === view);
         });
+        renderCategoryFilters();
         loadClassification();
     }
 
@@ -129,43 +157,60 @@ require_once 'includes/header.php';
         try {
             const res = await csrfFetch('api/categorias.php');
             const json = await res.json();
-            const container = document.getElementById('cat-filter-container');
-            container.innerHTML = '';
 
             if (json.data) {
-                let hasChallengers = false;
-                json.data.forEach(c => {
-                    const name = c.nome;
-                    const isMaster = name === 'Master';
-                    const isChallenger = name.includes('Challenger') || name.includes('Challenge');
-                    if (!isMaster && !isChallenger) return;
-
-                    const btn = document.createElement('button');
-                    btn.className = 'toggle-btn';
-                    if (isMaster) btn.classList.add('cat-master');
-                    if (isChallenger) btn.classList.add('cat-challengers');
-                    btn.dataset.cat = name;
-                    
-                    const icon = isMaster ? '<i class="fas fa-star"></i>' : '<i class="fas fa-trophy"></i>';
-                    btn.innerHTML = `${icon} ${name}`;
-                    container.appendChild(btn);
-
-
-                    if (isChallenger) hasChallengers = true;
-                });
-
-                if (hasChallengers) {
-                    currentCategory = 'Challengers';
-                } else {
-                    const firstBtn = container.querySelector('button');
-                    if (firstBtn) currentCategory = firstBtn.dataset.cat;
-                }
-                setCategory(currentCategory);
+                availableCategories = json.data
+                    .map(c => c.nome)
+                    .filter(name => name === 'Master' || name.includes('Challenger') || name.includes('Challenge'));
             }
         } catch (e) {
             console.error(e);
         }
+        renderCategoryFilters();
         loadClassification();
+    }
+
+    function renderCategoryFilters() {
+        const container = document.getElementById('cat-filter-container');
+        if (!container) return;
+
+        const categoryOptions = [...availableCategories];
+        if (currentView === 'equipes') {
+            categoryOptions.push('Geral');
+        }
+
+        if (currentView === 'equipes') {
+            if (!categoryOptions.includes(currentCategory)) {
+                currentCategory = 'Geral';
+            }
+        } else if (!categoryOptions.includes(currentCategory)) {
+            const challengersOption = categoryOptions.find(name => name.includes('Challenger') || name.includes('Challenge'));
+            currentCategory = challengersOption || categoryOptions[0] || '';
+        }
+
+        container.innerHTML = '';
+        categoryOptions.forEach(name => {
+            const isMaster = name === 'Master';
+            const isChallenger = name.includes('Challenger') || name.includes('Challenge');
+            const isGeneral = name === 'Geral';
+
+            const btn = document.createElement('button');
+            btn.className = 'toggle-btn';
+            if (isMaster) btn.classList.add('cat-master');
+            if (isChallenger) btn.classList.add('cat-challengers');
+            if (isGeneral) btn.classList.add('cat-general');
+            btn.dataset.cat = name;
+            btn.classList.toggle('active', name === currentCategory);
+
+            const icon = isMaster
+                ? '<i class="fas fa-star"></i>'
+                : isChallenger
+                    ? '<i class="fas fa-trophy"></i>'
+                    : '<i class="fas fa-layer-group"></i>';
+
+            btn.innerHTML = `${icon} ${name}`;
+            container.appendChild(btn);
+        });
     }
 
     async function loadClassification() {
@@ -316,23 +361,30 @@ require_once 'includes/header.php';
                 }
 
                 let stagesHtml = '';
+                const descartadasSet = new Set(row.descartes_etapas || []);
                 etapas.forEach(et => {
                     const pts = row.pontos_por_etapa[et.id];
+                    const isDescartado = descartadasSet.has(et.id);
                     let valDisplay = '-';
-                    let zeroClass = '';
+                    let cellClass = '';
                     if (pts !== undefined && pts !== null) {
                         valDisplay = parseFloat(pts).toFixed(1);
                         if (valDisplay.endsWith('.0')) valDisplay = parseInt(pts);
-                        if (pts == 0) zeroClass = 'zero';
+                        if (isDescartado) cellClass = 'descartado';
+                        else if (pts == 0) cellClass = 'zero';
                     }
-                    stagesHtml += `<td class="stage-pt ${zeroClass}" style="text-align: center !important;">${valDisplay}</td>`;
+                    stagesHtml += `<td class="stage-pt ${cellClass}" style="text-align: center !important;" title="${isDescartado ? 'Resultado descartado' : ''}">${valDisplay}</td>`;
                 });
 
                 let totalDisplay = parseFloat(row.total).toFixed(1);
                 if (totalDisplay.endsWith('.0')) totalDisplay = parseInt(row.total);
 
+                const tieBadge = row.tiebreaker_used
+                    ? `<span class="tiebreak-badge" title="Desempate por critério ${row.tiebreaker_used}">${row.tiebreaker_used}</span>`
+                    : '';
+
                 tr.innerHTML = `
-                    <td class="compact-col">${posBadge}</td>
+                    <td class="compact-col">${posBadge}${tieBadge}</td>
                     <td class="compact-col">${entityNameHtml}</td>
                     ${currentView === 'pilotos' ? `<td class="compact-col">${teamHtml}</td>` : ''}
                     ${stagesHtml}
@@ -341,9 +393,24 @@ require_once 'includes/header.php';
                 tbody.appendChild(tr);
             });
 
+            // Mostrar disclaimer quando há descartes ou empates
+            const hasDescartes = json.data.some(r => r.descartes_etapas && r.descartes_etapas.length > 0);
+            const hasEmpates = json.data.some(r => r.tiebreaker_used);
+            const disclaimer = document.getElementById('disclaimer-desempate');
+            if (disclaimer) disclaimer.style.display = (hasDescartes || hasEmpates) ? 'block' : 'none';
+
+            const generalDisclaimer = document.getElementById('disclaimer-geral-equipes');
+            if (generalDisclaimer) {
+                generalDisclaimer.style.display = (currentView === 'equipes' && currentCategory === 'Geral')
+                    ? 'block'
+                    : 'none';
+            }
+
         } catch (e) {
             compactList.innerHTML = `<div class="no-data" style="color:red;">Erro: ${e.message}</div>`;
             tbody.innerHTML = `<tr><td colspan="100" class="text-center text-danger">Erro: ${e.message}</td></tr>`;
+            const generalDisclaimer = document.getElementById('disclaimer-geral-equipes');
+            if (generalDisclaimer) generalDisclaimer.style.display = 'none';
         }
     }
 </script>

@@ -40,6 +40,9 @@ desktop.ini
 .agent/
 .agents/
 .claude/
+.reversa/
+AGENTS.md
+CLAUDE.md
 _bmad/
 _bmad-output/
 design-artifacts/
