@@ -161,10 +161,13 @@ $formatterMonth = new IntlDateFormatter('pt_BR', IntlDateFormatter::FULL, IntlDa
                 <p>Adicione a primeira etapa do campeonato!</p>
             </div>
         <?php else: ?>
-            <?php foreach ($etapas as $index => $etapa):
-                $dataObj = new DateTime($etapa['data']);
-                $isPast = $dataObj < new DateTime('today');
-                $isToday = $dataObj->format('Y-m-d') === date('Y-m-d');
+            <?php
+            $now = new DateTimeImmutable('now');
+            foreach ($etapas as $index => $etapa):
+                $dataObj = new DateTimeImmutable($etapa['data']);
+                $etapaDateTime = new DateTimeImmutable($etapa['data'] . ' ' . ($etapa['hora'] ?? '00:00:00'));
+                $isPast = $etapaDateTime->modify('+90 minutes') <= $now;
+                $isToday = $etapaDateTime->format('Y-m-d') === $now->format('Y-m-d');
                 $weekdayName = ucfirst($formatterWeekday->format($dataObj));
                 $monthName = strtoupper($formatterMonth->format($dataObj));
                 // Dados do patrocinador e link do Maps

@@ -20,7 +20,7 @@ function filterEtapas() {
         const kartodromo = card.dataset.kartodromo.toLowerCase();
         const patrocinador = card.dataset.patrocinador;
         const tipo = card.dataset.tipo;
-        const isPast = card.classList.contains('past') || card.classList.contains('today');
+        const isPast = card.classList.contains('past');
 
         const matchSearch = nome.includes(searchTerm) ||
             kartodromo.includes(searchTerm) ||
